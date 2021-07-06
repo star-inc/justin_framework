@@ -4,10 +4,9 @@
 
 class Response
 {
+    private const COOKIES_ROOT = "/";
     private int $status = 200;
     private mixed $body;
-
-    private const COOKIES_ROOT = "/";
 
     public function redirect(string $value_uri, $permanent = false): static
     {
@@ -16,16 +15,16 @@ class Response
         return $this;
     }
 
+    public function setStatus(int $status): static
+    {
+        $this->status = $status;
+        return $this;
+    }
+
     public function redirectForUpgrade(string $value_uri): static
     {
         $this->setStatus(307);
         header("Location: $value_uri;", true, $this->status);
-        return $this;
-    }
-
-    public function setStatus(int $status): static
-    {
-        $this->status = $status;
         return $this;
     }
 

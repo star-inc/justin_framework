@@ -19,6 +19,30 @@ class Request
         $this->body = file_get_contents("php://input");
     }
 
+    public static function assertKeysInData(Response $response, array|string $key, array $data): void
+    {
+        $key = is_array($key) ? $key : [$key];
+        $result = array_filter($key, fn($name) => !array_key_exists($name, $data));
+        if (empty($result)) return;
+        $response->setStatus(400)->setBody([
+            "status" => 400,
+            "message" => "Bad Request",
+            "reason" => "Missing the argument(s)",
+            "missing" => $result
+        ])->sendJSON(true);
+    }
+
+    public static function validData(Response $response, callable $validator, mixed $data): void
+    {
+        if (!(call_user_func($validator, $data))) {
+            $response->setStatus(400)->setBody([
+                "status" => 400,
+                "message" => "Bad Request",
+                "reason" => "Invalid data"
+            ])->sendJSON(true);
+        }
+    }
+
     /**
      * @return string
      */
@@ -51,14 +75,6 @@ class Request
         return $this->method;
     }
 
-    /**
-     * @return string
-     */
-    public function getBody(): string
-    {
-        return $this->body;
-    }
-
     public function getQuery(string $key): string
     {
         return $_GET[$key] ?? "";
@@ -75,41 +91,6 @@ class Request
         return $_SERVER["HTTP_$key"] ?? "";
     }
 
-    public static function assertKeysInData(Response $response, array|string $key, array $data): void
-    {
-        $key = is_array($key) ? $key : [$key];
-        $result = array_filter($key, fn($name) => !array_key_exists($name, $data));
-        if (empty($result)) return;
-        $response->setStatus(400)->setBody([
-            "status" => 400,
-            "message" => "Bad Request",
-            "reason" => "Missing the argument(s)",
-            "missing" => $result
-        ])->sendJSON(true);
-    }
-
-    public static function validData(Response $response, callable $validator, mixed $data): void
-    {
-        if (!(call_user_func($validator, $data))) {
-            $response->setStatus(400)->setBody([
-                "status" => 400,
-                "message" => "Bad Request",
-                "reason" => "Invalid data"
-            ])->sendJSON(true);
-        }
-    }
-
-    public function readForm(): array
-    {
-        parse_str($this->getBody(), $result);
-        return $result;
-    }
-
-    public function readJSON(): array
-    {
-        return json_decode($this->body, true);
-    }
-
     public function read(): array
     {
         $content_type = $_SERVER["CONTENT_TYPE"] ?? "application/x-www-form-urlencoded";
@@ -119,5 +100,24 @@ class Request
             "application/json" => $this->readJSON(),
             default => []
         };
+    }
+
+    public function readForm(): array
+    {
+        parse_str($this->getBody(), $result);
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody(): string
+    {
+        return $this->body;
+    }
+
+    public function readJSON(): array
+    {
+        return json_decode($this->body, true);
     }
 }

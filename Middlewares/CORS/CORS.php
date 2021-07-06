@@ -15,6 +15,16 @@ class CORS implements MiddlewareInterface
     public const METHOD_DELETE = "DELETE";
     public const METHOD_OPTIONS = "OPTIONS";
 
+    public static function trigger(ControllerInterface $controller): void
+    {
+        assert($controller instanceof AllowCORS, new AssertionError("The controller is not allowed CORS."));
+        if (!$controller->getConfig()->get("CORS", false)) return;
+        self::rewrite($controller);
+        if ($controller->getRequest()->getMethod() === self::METHOD_OPTIONS) {
+            $controller->getResponse()->setStatus(204)->send(true);
+        }
+    }
+
     public static function rewrite(AllowCORS $controller)
     {
         $controller->getResponse()
@@ -24,16 +34,6 @@ class CORS implements MiddlewareInterface
         if ($controller->getAllowCredentials()) {
             $controller->getResponse()
                 ->setHeader("Access-Control-Allow-Credentials", "true");
-        }
-    }
-
-    public static function trigger(ControllerInterface $controller): void
-    {
-        assert($controller instanceof AllowCORS, new AssertionError("The controller is not allowed CORS."));
-        if (!$controller->getConfig()->get("CORS", false)) return;
-        self::rewrite($controller);
-        if ($controller->getRequest()->getMethod() === self::METHOD_OPTIONS) {
-            $controller->getResponse()->setStatus(204)->send(true);
         }
     }
 }

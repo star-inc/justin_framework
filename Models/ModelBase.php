@@ -16,15 +16,15 @@ class ModelBase implements JsonSerializable
         return $this;
     }
 
-    public function toArray(): array
-    {
-        return (array)$this;
-    }
-
     #[Pure]
     public function jsonSerialize(): ?array
     {
         $result = $this->toArray();
         return !empty($result) ? $result : null;
+    }
+
+    public function toArray(): array
+    {
+        return (array)$this;
     }
 }
