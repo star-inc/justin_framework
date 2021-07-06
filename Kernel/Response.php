@@ -60,6 +60,9 @@ class Response
     public function send(bool $exit = false, ?string $deliver = null)
     {
         http_response_code($this->status);
+        if ($this->status === 204) {
+            $deliver = "";
+        }
         if (is_null($deliver) && !is_string($this->body)) {
             $deliver = serialize($this->body);
         }
