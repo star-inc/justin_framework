@@ -1,0 +1,23 @@
+{
+  "name": "starinc/justin_example_roadrunner",
+  "description": "Simple PHP backend framework.",
+  "license": "MIT",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "JustinExample\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "SuperSonic",
+      "email": "supersonic@livemail.tw"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*",
+    "firebase/php-jwt": "^5.5",
+    "spiral/roadrunner": "^2.0",
+    "nyholm/psr7": "^1.4"
+  }
+}

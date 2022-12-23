@@ -1,0 +1,7 @@
+vendor/
+composer.lock
+config.inc.php
+
+.DS_Store
+
+rr

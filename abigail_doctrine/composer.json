@@ -1,0 +1,22 @@
+{
+  "name": "starinc/justin_example_abigail_doctrine",
+  "description": "Simple PHP backend framework.",
+  "license": "MIT",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "JustinExample\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "SuperSonic",
+      "email": "supersonic@livemail.tw"
+    }
+  ],
+  "require": {
+    "doctrine/orm": "^2.6.2",
+    "symfony/yaml": "2.*",
+    "symfony/cache": "^5.3"
+  }
+}

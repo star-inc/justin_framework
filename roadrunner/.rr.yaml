@@ -1,0 +1,11 @@
+rpc:
+  listen: tcp://127.0.0.1:1100
+
+server:
+  command: "php worker.php"
+
+http:
+  address: "0.0.0.0:1260"
+
+logs:
+  level: error

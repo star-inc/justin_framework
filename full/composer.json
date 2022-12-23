@@ -1,0 +1,20 @@
+{
+  "name": "starinc/justin_example_full",
+  "description": "Simple PHP backend framework.",
+  "license": "MIT",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "JustinExample\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "SuperSonic",
+      "email": "supersonic@livemail.tw"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*"
+  }
+}
