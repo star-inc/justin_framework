@@ -18,3 +18,16 @@ There are two sub-types of Justin Framework, including:
 - full
 - native
 - roadrunner
+
+## Warning
+
+There is lack official support from Star Inc.
+
+This is adapted from our internal projects and contributed for open source community,
+but we already give up to maintain almost PHP projects since 2022.
+
+If you want to contribute, please feel free to fork and submit a pull request.
+
+## License
+
+MIT License
