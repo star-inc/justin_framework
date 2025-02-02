@@ -11,7 +11,7 @@ It is based on the MVC pattern and uses plain PHP code, so you don't need to lea
 
 ## Sub-types of Justin Framework
 
-There are two sub-types of Justin Framework, including:
+There are several sub-types of Justin Framework, including:
 
 - abigail
 - abigail_doctrine
