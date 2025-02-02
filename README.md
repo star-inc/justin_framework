@@ -1,16 +1,20 @@
-# justin_framework
+# Justin PHP Framework
 
-Simple PHP backend framework
+The easiest way to create a RESTful API in PHP.
 
-## Subtype
+It's a portable framework for PHP 8.0+, powered by open source community.
 
-https://github.com/startw-anginger/justin_framework/tree/native
+## What is Justin Framework?
 
+Justin Framework is a PHP framework that allows you to create a RESTful API in a very simple way.
+It is based on the MVC pattern and uses plain PHP code, so you don't need to learn a new language or syntax to use it.
 
-https://github.com/startw-anginger/justin_framework/tree/talisa
+## Sub-types of Justin Framework
 
+There are two sub-types of Justin Framework, including:
 
-https://github.com/startw-anginger/justin_framework/tree/abigail
-
-
-https://github.com/startw-anginger/justin_framework/tree/abigail_doctrine
+- abigail
+- abigail_doctrine
+- full
+- native
+- roadrunner
